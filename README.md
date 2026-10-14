@@ -1,6 +1,20 @@
 # Deploy Agent
 ## Video walkthrough
 https://youtu.be/BwuEpc34zB0
+## Walkthrough notes (narration for the video)
+The video has no audio because of a recording issue, so my explanation is written here.
+
+**Approach:** One shell script, `deploy_agent.sh`, with three features (deploy, run, archive) and clean signal handling. It wraps the unmodified `attendance_checker.py`.
+
+**Code structure:** Helper functions print friendly messages and validate input. `preflight` checks python3 and zip. `on_interrupt` traps Ctrl+C and Ctrl+Z, zips the partial project, then deletes it. `do_deploy` builds the folders, copies the templates, builds the roster (option A copies from the template, option B generates fresh), sets permissions, and updates thresholds with `sed` after checking they are numbers. `do_archive` copies each log into its own folder with a timestamp.
+
+**In the video:**
+1. Code tour of `deploy_agent.sh`
+2. Deploy of `demo1` with option A, thresholds 80 and 60, and a live marking session
+3. Archive of the logs with timestamped files
+4. Ctrl+C during a deploy: the zip is created and the half-built folder is removed
+
+**Edge cases handled:** an existing folder asks before replacing; invalid numbers or thresholds are re-prompted; a missing `absent.log` is skipped without crashing; missing python3 or zip fails early with a clear message.
 A gentle, single-file bootstrapper for the Student Attendance Tracker. One script (`deploy_agent.sh`) deploys the project, runs it, and archives its logs, and it cleans up after itself if you interrupt it.
 
 ## Layout
