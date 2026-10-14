@@ -1,5 +1,6 @@
 # Deploy Agent
-
+## Video walkthrough
+https://youtu.be/BwuEpc34zB0
 A gentle, single-file bootstrapper for the Student Attendance Tracker. One script (`deploy_agent.sh`) deploys the project, runs it, and archives its logs, and it cleans up after itself if you interrupt it.
 
 ## Layout
